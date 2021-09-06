@@ -48,6 +48,7 @@ func HandleTopSecret(w http.ResponseWriter, r *http.Request) {
 				w.Header().Set("Content-Type", "application/json")
 				w.Write(Msg)
 				w.Write(data)
+				specificMetadata = specificMetadata[:0]
 			} else {
 				fmt.Fprintf(w, Code404)
 			}
