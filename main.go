@@ -1,9 +1,14 @@
 package main
 
+import "os"
+
 func main() {
 
-	//Define puerto para la función NewServe en server.go:
-	server := NewServer(":8080")
+	Port := os.Getenv("PORT")
+	if Port == "" {
+		Port = "8000"
+	}
+	server := NewServer(":" + Port)
 
 	//Endpoints:
 	server.Handle("/", "GET", HandleRoot)
