@@ -37,11 +37,21 @@ func SaveSatellites(w http.ResponseWriter, r *http.Request) {
 	// Agrega a "Name" la variable de la url:
 	newSatellite.Name = GetID(Id)
 
-	// Respuesta en JSON:
+	// Acumular en slice:
 	StJSON = append(StJSON, newSatellite)
-	w.Header().Set("Content-Type", "application/json")
+
+	//Respuesta OK:
 	w.WriteHeader(http.StatusCreated)
-	json.NewEncoder(w).Encode(newSatellite)
+	fmt.Fprintf(w, Code200)
+}
+
+func DeleteSatelites(w http.ResponseWriter, r *http.Request) {
+	if len(StJSON) > 0 {
+		StJSON = StJSON[:0]
+		fmt.Fprintf(w, Code200)
+	} else {
+		fmt.Fprintf(w, "ERROR: No hay elementos a eliminar.")
+	}
 }
 
 // Imprime lo almacenado en StJSON:

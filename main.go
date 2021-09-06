@@ -16,6 +16,7 @@ func main() {
 	server.Handle(("/topsecret_split/"), "POST", HandleTopSecret)
 	server.Handle(("/topsecret_split/"), "GET", HandleTopSecretSplit)
 	server.Handle("/topsecret_split/showme", "GET", GetSatellites)
+	server.Handle("/topsecret_split/showme", "DELETE", DeleteSatelites)
 	server.Handle("/topsecret_split/kenobi", "POST", SaveSatellites)
 	server.Handle("/topsecret_split/skywalker", "POST", SaveSatellites)
 	server.Handle("/topsecret_split/sato", "POST", SaveSatellites)

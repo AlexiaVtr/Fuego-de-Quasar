@@ -84,6 +84,9 @@ func HandleTopSecretSplit(w http.ResponseWriter, r *http.Request) {
 				w.Header().Set("Content-Type", "application/json")
 				w.Write(Msg)
 				w.Write(data)
+
+				// Resetear el slice de asteroides:
+				StJSON = StJSON[:0]
 			} else {
 				fmt.Fprintf(w, Info)
 			}
