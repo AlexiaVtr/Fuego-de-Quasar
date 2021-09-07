@@ -10,19 +10,19 @@ import (
 )
 
 // Separa la variable de la url:
-func GetID(path string) string {
-	var id string
+
+func GetVarOfHost(r *http.Request) (v string) {
+	Id := strings.TrimPrefix(r.URL.Path, "/")
 	for i := 0; i != 50; i++ {
-		if i >= 16 && i < len(path) {
-			id += string(path[i])
+		if i >= 16 && i < len(Id) {
+			v += string(Id[i])
 		}
 	}
-	return id
+	return v
 }
 
 func SaveSatellites(w http.ResponseWriter, r *http.Request) {
 	var newSatellite Satellite
-	Id := strings.TrimPrefix(r.URL.Path, "/")
 
 	// Agregar el input:
 	reqBody, err := ioutil.ReadAll(r.Body)
@@ -35,7 +35,7 @@ func SaveSatellites(w http.ResponseWriter, r *http.Request) {
 	json.Unmarshal(reqBody, &newSatellite)
 
 	// Agrega a "Name" la variable de la url:
-	newSatellite.Name = GetID(Id)
+	newSatellite.Name = GetVarOfHost(r)
 
 	// Acumular en slice:
 	StJSON = append(StJSON, newSatellite)

@@ -31,7 +31,7 @@ func (s *Server) Listen() error {
 	return nil
 }
 
-// Agrega la ruta al Handler del main:
+// Agrega la ruta y método al Handler del main:
 
 func (s *Server) Handle(path string, method string,
 	handler http.HandlerFunc) {
