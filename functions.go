@@ -24,18 +24,20 @@ func GetVarOfHost(r *http.Request) (v string) {
 func SaveSatellites(w http.ResponseWriter, r *http.Request) {
 	var newSatellite Satellite
 
-	// Agregar el input:
+	// Guardar el input:
 	reqBody, err := ioutil.ReadAll(r.Body)
 
 	if err != nil {
 		fmt.Fprintf(w, Info)
 	}
 
-	// Se asigna el input como nuevo obj:
+	// Parsea input como nuevo obj:
 	json.Unmarshal(reqBody, &newSatellite)
 
-	// Agrega a "Name" la variable de la url:
-	newSatellite.Name = GetVarOfHost(r)
+	if newSatellite.Name == "" {
+		// Agrega a "Name" el nombre de la url:
+		newSatellite.Name = GetVarOfHost(r)
+	}
 
 	// Acumular en slice:
 	StJSON = append(StJSON, newSatellite)

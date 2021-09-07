@@ -1,5 +1,10 @@
 package main
 
+type Url struct {
+	Name []string
+	Host []string
+}
+
 type Message struct {
 	Satellites []struct {
 		Name     string   `json:"name"`
